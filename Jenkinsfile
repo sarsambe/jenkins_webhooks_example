@@ -10,10 +10,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building artifact version ${BUILD_VERSION}"
-                sh '''
-                  echo "This is build ${BUILD_NUMBER}" > app.txt
-                  zip app-${BUILD_VERSION}.zip app.txt
-                '''
+                bat """
+                echo This is build %BUILD_NUMBER% > app.txt
+                powershell Compress-Archive app.txt app-%BUILD_VERSION%.zip
+                """
             }
         }
 
